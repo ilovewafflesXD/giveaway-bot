@@ -1,6 +1,6 @@
 # WaffleCore audit
 
-Scope: `core.jar` (the version in this repo) and `WaffleHost-2.0.0.jar`, decompiled and read. The repo has no source, so every finding below comes from the decompiled classes. Items marked "fixed in 2.1" are addressed by the new host or modules. Everything else needs a change inside `core.jar`, which needs its source rebuilt first.
+Scope: `core.jar` and `WaffleHost-2.0.0.jar` as found in this repo, decompiled and read. The findings below come from the decompiled classes. As of 2.2.0 the core source lives in `core/` (recovered by decompiling, so variable names are `var1`, `var2`, and so on) and most findings are fixed. The status table at the end shows what changed.
 
 ## High priority
 
@@ -36,12 +36,25 @@ Unrelated to the plugin, but it will not run as committed:
 - Giveaways live in memory and use `asyncio.sleep`, so a restart loses them and they never end.
 - The user session stores the whole Discord user object, and the dashboard shows nothing except a greeting.
 
-## What 2.1 changes
+## Status in 2.2.0
 
 | Finding | Status |
 | --- | --- |
-| 3 (blocking, unsafe saves) | Pattern provided and used by all new modules; core itself unchanged |
-| 4 (economy API) | Bridge for modules; core unchanged |
-| 6 (chat events) | New `chatguard` uses `AsyncChatEvent` |
-| 11 (reload cancels tasks) | Fixed in the host |
-| 1, 2, 5, 7, 8, 9, 10, 12, 13, 14 | Need core source; not changed |
+| 1 (ban check race) | Fixed. Login checks read an immutable snapshot of active bans, rebuilt on the main thread within one tick of any change. The async thread no longer touches the YAML tree |
+| 2 (linear ban scan) | Fixed. The snapshot is keyed by UUID, IP and name, so a login is a few hash lookups. Expired bans are skipped at lookup time |
+| 3 (blocking, unsafe saves) | Fixed in core. Data is serialised on the main thread, written on a background thread to a temp file, and renamed into place. Shutdown and reload flush synchronously |
+| 4 (economy API) | Fixed for modules. Core registers a typed `WaffleEconomy`. A Vault provider is not included |
+| 5 (`staffcore.*` permissions) | Fixed. Off by default, behind `legacy-staffcore-permissions` |
+| 6 (chat events) | `Moderation` and `Auction` now use Paper's `AsyncChatEvent`. Legacy `ChatColor` is still used for colour codes |
+| 7 (command wrapper) | Partly fixed. A handler that returns false now shows the command and its description. The command-map takeover is unchanged |
+| 8 (linear economy work) | Fixed. Name lookup uses a cached map, and `/baltop` is cached for 15 seconds and invalidated on any balance change |
+| 9 (no economy audit trail) | Fixed. Append-only `economy.log` written off-thread |
+| 10 (unbounded moderation data) | Partly fixed. `moderation.retention-days` prunes finished punishments. IP history retention and a per-player erase command are not done |
+| 11 (reload cancels tasks) | Host reloads everything when core reloads. Core still calls `cancelTasks` on stop |
+| 12 (package-private singleton) | Unchanged. Only the economy is exposed |
+| 13 (hard-coded values) | Unchanged |
+| 14 (no source, tests or CI) | Source is now in the repo. There are still no automated tests or CI |
+
+## How 2.2.0 was checked
+
+The jar was built and run on a Paper 26.3 test server. Checked: startup, `/eco`, `/baltop`, `/ban`, `/tempban`, `/unban`, `/ban-ip`, `/wafflecore reload` and `/wafflecore reload core`. The login check was exercised with synthetic login events: a banned UUID was kicked, an unrelated player was allowed, an unbanned player was allowed, and an IP ban kicked a different account on that address. Flows that need a real player connected were not tested: GUIs, teleports, kits, the auction house, orders, mining, combat tagging and chat. Chat in particular changed event type, so watch mute, staff chat and auction search input on first use.

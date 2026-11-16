@@ -2,19 +2,26 @@
 
 All-in-one server core for WaffleMC (Paper 26.3, Java 25). Two layers:
 
-- **WaffleHost** (`WaffleHost-2.1.0.jar`) is the actual Bukkit plugin. It loads the existing `core.jar` and any number of module jars, each in its own class loader, and can hot-reload them one at a time.
+- **WaffleHost** (`WaffleHost-2.2.0.jar`) is the actual Bukkit plugin. It loads the existing `core.jar` and any number of module jars, each in its own class loader, and can hot-reload them one at a time.
 - **Modules** are small jars in `plugins/WaffleCore/modules/`. Each one has its own `config.yml`, commands and permissions.
 
-`core.jar` (economy, homes, warps, TPA, RTP, kits, auction house, orders, moderation, staff tools) is unchanged. See [AUDIT.md](AUDIT.md) for a review of it.
+`core.jar` (economy, homes, warps, TPA, RTP, kits, auction house, orders, moderation, staff tools) now builds from source in `core/`. The source was recovered by decompiling the old jar, so local variable names are `var1`, `var2` and so on, and comments are gone. See [AUDIT.md](AUDIT.md) for what was reviewed and fixed.
 
 ## Install
 
-1. Replace `plugins/WaffleHost-2.0.0.jar` with `dist/WaffleHost-2.1.0.jar`.
-2. Keep `plugins/WaffleCore/core.jar` where it is.
+1. Replace `plugins/WaffleHost-2.0.0.jar` (or 2.1.0) with `dist/WaffleHost-2.2.0.jar`.
+2. Replace `plugins/WaffleCore/core.jar` with `dist/core.jar`.
 3. Copy the jars you want from `dist/modules/` into `plugins/WaffleCore/modules/`.
 4. Restart once. After that, `/wafflecore reload` applies code and config changes without a restart.
 
-Existing data and config are untouched. To go back, put 2.0.0 back and delete the `modules` folder.
+Existing data and config are kept. New settings are read from defaults inside the jar, so you do not need to edit `config.yml`. To go back, put the 2.0.0 host and the old `core.jar` back (see git history) and delete the `modules` folder.
+
+### Changes to know about in 2.2.0
+
+- **Old `staffcore.*` permissions no longer grant anything by default.** Core used to accept `staffcore.admin`, `staffcore.staff`, `staffcore.staffchat`, `staffcore.bypass.*`, `staffcore.freeze.alerts`, `staffcore.check.ip` and `staffcore.command.*`. If any staff group still relies on those nodes, either grant the matching `wafflecore.*` nodes or set `legacy-staffcore-permissions: true` in `plugins/WaffleCore/config.yml`.
+- **Economy log.** Every balance change is appended to `plugins/WaffleCore/economy.log` with the player, old and new balance, and the reason (`/pay`, `/eco`).
+- **Retention.** `moderation.retention-days` (default `0`, keep everything) deletes finished punishment records older than that many days on startup.
+- **Saves.** Data files are written on a background thread to a temp file and then renamed, so a crash cannot leave a half-written file. They are flushed on shutdown and on reload.
 
 ## Host commands
 
@@ -48,7 +55,7 @@ Each module writes its default config to `plugins/WaffleCore/modules/<name>/conf
 ./gradlew dist
 ```
 
-Needs JDK 25. The host and module jars are written to `dist/`.
+Needs JDK 25. The host, `core.jar` and module jars are written to `dist/`. The core source is in `core/src/main/java/com/wafflemc/core/`.
 
 ## Writing a module
 
@@ -58,7 +65,7 @@ Needs JDK 25. The host and module jars are written to `dist/`.
 
 `ModuleBase` tracks commands, listeners, tasks, permissions and data files, and removes them all when the module stops, so a reload cannot leak anything. Use `data("file.yml")` for crash-safe, off-thread saves. Use `Services.economy()` to read or change balances from the main thread.
 
-The economy is reached by reflection into `core.jar`, because it is package-private. The bridge checks it at startup and logs a clear warning if `core.jar` changes shape.
+`core.jar` registers its economy through `Services.economy(...)`, so modules get a typed `WaffleEconomy` with no reflection. If an older `core.jar` is installed, the host falls back to a reflection bridge.
 
 ## Notes
 

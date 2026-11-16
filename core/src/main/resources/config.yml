@@ -1,0 +1,93 @@
+prefix: "&6&lWaffle&e&lMC &8» &7"
+currency: "$"
+starting-balance: 0
+teleport-warmup: 3
+home-limit: 3
+tpa-timeout: 60
+# Set true to keep honouring the old staffcore.* permission nodes (staffcore.admin, staffcore.staff, ...).
+legacy-staffcore-permissions: false
+takeover-skip: [balance, bal, money, pay, baltop, balancetop, eco]
+first-join-kit: "start"
+join-message: "&8[&a+&8] &e{player}"
+quit-message: "&8[&c-&8] &e{player}"
+modules:
+  mining: true
+  combat: true
+  firstjoin: true
+spawn:
+  first-join: true
+  respawn: true
+rtp:
+  world: "world"
+  radius: 4000
+  cooldown: 30
+combat:
+  seconds: 15
+  blocked-commands: [spawn, home, tpa, tpahere, tpaccept, warp, rtp, back, kit, kits, ah, orders]
+mining:
+  require-sneak: true
+  trees: true
+  veins: true
+  tree-limit: 128
+  vein-limit: 64
+auction:
+  tax: 5.0
+  duration-hours: 48
+  max-listings: 5
+orders:
+  max-orders: 5
+  max-amount: 2304
+moderation:
+  # Delete finished punishments older than this many days on startup. 0 keeps everything.
+  retention-days: 0
+  appeal: "discord.gg/BvFHUxveqt"
+  max-warnings: 3
+  jail-radius: 12
+  report-cooldown: 60
+  presets:
+    hacking:
+      name: "&c&lHacking / Cheating"
+      type: tempban
+      duration: 30d
+      reason: "Hacking / cheating"
+      icon: DIAMOND_SWORD
+    xray:
+      name: "&6&lX-Ray"
+      type: tempban
+      duration: 7d
+      reason: "X-ray"
+      icon: IRON_PICKAXE
+    griefing:
+      name: "&c&lGriefing"
+      type: tempban
+      duration: 7d
+      reason: "Griefing"
+      icon: TNT
+    spam:
+      name: "&e&lSpam"
+      type: tempmute
+      duration: 1h
+      reason: "Spamming chat"
+      icon: PAPER
+    toxicity:
+      name: "&e&lToxicity"
+      type: tempmute
+      duration: 1d
+      reason: "Toxic behaviour"
+      icon: BOOK
+    advertising:
+      name: "&c&lAdvertising"
+      type: mute
+      reason: "Advertising"
+      icon: OAK_SIGN
+    rules:
+      name: "&6&lBreaking rules"
+      type: warn
+      reason: "Breaking the server rules"
+      icon: GOLD_NUGGET
+    misc:
+      name: "&b&lKick"
+      type: kick
+      reason: "Disruptive behaviour"
+      icon: LEATHER_BOOTS
+  muted-blocked-commands: [msg, tell, w, whisper, r, reply, me, say, t, m, pm, mail]

@@ -1,5 +1,5 @@
 name: WaffleCore
-version: 2.1.0
+version: 2.2.0
 main: com.wafflemc.host.WaffleHost
 api-version: '26.3'
 author: WaffleMC

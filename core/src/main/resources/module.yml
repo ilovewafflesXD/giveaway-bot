@@ -1,0 +1,262 @@
+commands:
+  balance:
+    description: Check a balance.
+    aliases: [bal, money]
+  pay:
+    description: Pay another player.
+  baltop:
+    description: Richest players.
+    aliases: [balancetop]
+  eco:
+    description: Manage balances.
+  spawn:
+    description: Go to spawn.
+  setspawn:
+    description: Set the spawn point.
+  home:
+    description: Go to a home.
+  homes:
+    description: List your homes.
+  sethome:
+    description: Set a home.
+  delhome:
+    description: Delete a home.
+  warp:
+    description: Go to a warp.
+  warps:
+    description: List warps.
+  setwarp:
+    description: Create a warp.
+  delwarp:
+    description: Delete a warp.
+  tpa:
+    description: Ask to teleport to a player.
+  tpahere:
+    description: Ask a player to teleport to you.
+  tpaccept:
+    description: Accept a teleport request.
+    aliases: [tpyes]
+  tpdeny:
+    description: Deny a teleport request.
+    aliases: [tpno]
+  tpcancel:
+    description: Cancel your teleport request.
+  rtp:
+    description: Random teleport.
+    aliases: [wild, randomtp]
+  back:
+    description: Return to your previous location.
+  kit:
+    description: Claim a kit.
+  kits:
+    description: Open the kit menu.
+  createkit:
+    description: Create a kit from your inventory.
+  delkit:
+    description: Delete a kit.
+  ah:
+    description: Auction house.
+    aliases: [auction]
+  orders:
+    description: Buy orders.
+    aliases: [order]
+  gm:
+    description: Change gamemode.
+    aliases: [gamemode]
+  fly:
+    description: Toggle flight.
+  heal:
+    description: Heal a player.
+  feed:
+    description: Feed a player.
+  vanish:
+    description: Toggle vanish.
+    aliases: [v]
+  invsee:
+    description: View an inventory.
+  endersee:
+    description: View an ender chest.
+    aliases: [ec]
+  tphere:
+    description: Teleport a player to you.
+    aliases: [s]
+  msg:
+    description: Private message.
+    aliases: [m, tell, w, whisper]
+  reply:
+    description: Reply to a private message.
+    aliases: [r]
+  broadcast:
+    description: Broadcast a message.
+    aliases: [bc]
+  day:
+    description: Set day.
+  night:
+    description: Set night.
+  top:
+    description: Teleport to the highest block.
+  speed:
+    description: Set movement speed.
+  clearchat:
+    description: Clear chat.
+    aliases: [cc]
+  ban:
+    description: Permanently ban a player.
+  tempban:
+    description: Temporarily ban a player.
+  ipban:
+    description: Permanently IP ban a player or address.
+    aliases: [banip, ban-ip, ip-ban]
+  tempipban:
+    description: Temporarily IP ban a player or address.
+    aliases: [tempbanip, tempban-ip]
+  unban:
+    description: Unban a player.
+    aliases: [pardon]
+  unbanip:
+    description: Unban an IP address.
+    aliases: [pardonip, pardon-ip, unban-ip]
+  mute:
+    description: Permanently mute a player.
+  tempmute:
+    description: Temporarily mute a player.
+  unmute:
+    description: Unmute a player.
+  warn:
+    description: Warn a player.
+  kick:
+    description: Kick a player.
+  setjail:
+    description: Create a jail at your location.
+  deljail:
+    description: Delete a jail.
+  jail:
+    description: Permanently jail a player.
+  tempjail:
+    description: Temporarily jail a player.
+  unjail:
+    description: Release a player from jail.
+  freeze:
+    description: Freeze or unfreeze a player.
+  check:
+    description: Inspect a player and their punishment history.
+  chat:
+    description: Switch between staff chat and public chat.
+  staffchat:
+    description: Send a staff chat message or toggle staff chat.
+    aliases: [sc]
+  punish:
+    description: Open the punish menu for a player.
+  alts:
+    description: Show accounts sharing an IP.
+  notes:
+    description: View or add staff notes on a player.
+  report:
+    description: Report a player to staff.
+  reports:
+    description: View open player reports.
+  staff:
+    description: List online staff.
+  gmc:
+    description: Creative mode.
+  gms:
+    description: Survival mode.
+  gmsp:
+    description: Spectator mode.
+  gma:
+    description: Adventure mode.
+  invincible:
+    description: Toggle invincibility.
+    aliases: [godmode, god]
+  tpall:
+    description: Teleport everyone to you or a place.
+  enchant:
+    description: Apply an unsafe enchantment to the held item.
+  repair:
+    description: Repair the held item.
+    aliases: [fix]
+  struck:
+    description: Strike lightning.
+    aliases: [strike, smite]
+  sudo:
+    description: Force a player to run a command or chat.
+  clear:
+    description: Clear an inventory.
+    aliases: [ci, clearinventory]
+  cleargrounditems:
+    description: Remove all dropped items.
+    aliases: [clearitems, clearlag]
+  phase:
+    description: Phase through the wall in front of you.
+    aliases: [thru]
+permissions:
+  wafflecore.admin:
+    default: op
+  wafflecore.back:
+    default: true
+  wafflecore.back.death:
+    default: op
+  wafflecore.balance.others:
+    default: true
+  wafflecore.mining.trees:
+    default: true
+  wafflecore.mining.veins:
+    default: true
+  wafflecore.bypass.warmup:
+    default: op
+  wafflecore.bypass.cooldown:
+    default: op
+  wafflecore.bypass.combat:
+    default: op
+  wafflecore.homes.unlimited:
+    default: op
+  wafflecore.gamemode:
+    default: op
+  wafflecore.fly:
+    default: op
+  wafflecore.heal:
+    default: op
+  wafflecore.feed:
+    default: op
+  wafflecore.vanish:
+    default: op
+  wafflecore.vanish.see:
+    default: op
+  wafflecore.invsee:
+    default: op
+  wafflecore.tp:
+    default: op
+  wafflecore.broadcast:
+    default: op
+  wafflecore.time:
+    default: op
+  wafflecore.top:
+    default: op
+  wafflecore.speed:
+    default: op
+  wafflecore.clearchat:
+    default: op
+  wafflecore.mod:
+    default: op
+  wafflecore.tools:
+    default: op
+  wafflecore.staff:
+    default: op
+  wafflecore.staff.chat:
+    default: op
+  wafflecore.freeze.alerts:
+    default: op
+  wafflecore.check.ip:
+    default: op
+  wafflecore.bypass.ban:
+    default: op
+  wafflecore.bypass.mute:
+    default: op
+  wafflecore.bypass.jail:
+    default: op
+  wafflecore.bypass.freeze:
+    default: op
+  wafflecore.bypass.warn:
+    default: op
+  wafflecore.bypass.kick:
+    default: op

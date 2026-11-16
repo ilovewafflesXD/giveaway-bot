@@ -71,6 +71,7 @@ public final class WaffleHost extends JavaPlugin {
         if (core.source.isFile()) {
             String err = core.start(this);
             if (err != null) getLogger().severe("core.jar failed to load: " + err);
+            else if (Services.economy().isPresent()) getLogger().info("Core registered its own economy API.");
             else linkEconomy();
         } else {
             getLogger().info("No core.jar found; starting without the legacy core.");

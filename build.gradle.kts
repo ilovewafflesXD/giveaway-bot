@@ -3,7 +3,7 @@ subprojects {
     apply(plugin = "java")
 
     group = "com.wafflemc"
-    version = "2.1.0"
+    version = "2.2.0"
 
     repositories {
         mavenCentral()
@@ -36,11 +36,12 @@ configure(subprojects.filter { it.path.startsWith(":modules:") }) {
 
 tasks.register<Copy>("dist") {
     group = "distribution"
-    description = "Copies the host jar and all module jars into dist/."
+    description = "Copies the host jar, core.jar and all module jars into dist/."
     dependsOn(subprojects.map { "${it.path}:jar" })
     into(layout.projectDirectory.dir("dist"))
     into("modules") {
         from(subprojects.filter { it.path.startsWith(":modules:") }.map { it.tasks.named("jar") })
     }
     from(project(":host").tasks.named("jar"))
+    from(project(":core").tasks.named("jar"))
 }
