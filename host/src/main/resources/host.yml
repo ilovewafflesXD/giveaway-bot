@@ -1,0 +1,7 @@
+# WaffleHost settings. Per-module settings live in plugins/WaffleCore/modules/<name>/config.yml.
+# The chat prefix is taken from plugins/WaffleCore/config.yml (the core's config) when it exists;
+# this value is only the fallback when core.jar is not installed.
+prefix: "&6&lWaffle&e&lMC &8» &7"
+
+# Module names (see /wafflecore status) that should not be started.
+disabled-modules: []

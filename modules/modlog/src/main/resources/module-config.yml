@@ -1,0 +1,82 @@
+# ModLog: a searchable audit trail of staff and moderation commands, with optional Discord alerts.
+# Logs are written off the main thread to plugins/WaffleCore/modules/modlog/logs/<date>.log
+
+retention-days: 30
+
+# Commands that are written to the log (first word only, without the slash).
+logged-commands:
+  - ban
+  - tempban
+  - ipban
+  - tempipban
+  - unban
+  - unbanip
+  - mute
+  - tempmute
+  - unmute
+  - warn
+  - kick
+  - jail
+  - tempjail
+  - unjail
+  - freeze
+  - punish
+  - notes
+  - alts
+  - check
+  - invsee
+  - endersee
+  - gm
+  - gmc
+  - gms
+  - gmsp
+  - gma
+  - fly
+  - vanish
+  - heal
+  - feed
+  - sudo
+  - eco
+  - op
+  - deop
+  - give
+  - tp
+  - tphere
+  - tpall
+  - clear
+  - enchant
+  - repair
+  - setspawn
+  - setwarp
+  - delwarp
+  - createkit
+  - delkit
+  - wafflecore
+  - wc
+
+# Also log staff joining and leaving.
+log-joins: true
+
+# Discord alerts. Paste a channel webhook URL to turn this on.
+webhook:
+  url: ""
+  username: "WaffleMC Moderation"
+  # Commands that trigger an alert. Everything here is also written to the log.
+  commands:
+    - ban
+    - tempban
+    - ipban
+    - tempipban
+    - unban
+    - mute
+    - tempmute
+    - unmute
+    - warn
+    - kick
+    - jail
+    - tempjail
+    - report
+    - sudo
+    - eco
+    - op
+    - deop

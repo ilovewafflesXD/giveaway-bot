@@ -1,0 +1,36 @@
+# Daily: a daily reward with streaks. Money is paid through the core economy.
+
+# Hours a player must wait between claims.
+cooldown-hours: 20
+# The streak resets if a player waits longer than this since their last claim.
+streak-window-hours: 48
+
+reward:
+  base: 250
+  # Extra money per streak day, up to streak-cap days.
+  per-streak-day: 50
+  streak-cap: 30
+
+# Extra rewards when a streak reaches a given day. Commands run from the console; {player} is replaced.
+milestones:
+  "7":
+    money: 1000
+    message: "&6One week streak! &7Here's a bonus."
+    commands: []
+  "14":
+    money: 2500
+    message: "&6Two week streak!"
+    commands: []
+  "30":
+    money: 10000
+    message: "&6&lThirty day streak! &7You're a legend."
+    commands: []
+
+# Remind players who can claim shortly after they join.
+join-reminder: true
+
+messages:
+  claimed: "&aDaily reward claimed: &6{amount} &8(&7streak: &e{streak} days&8)"
+  not-ready: "&cYou already claimed today. Come back in &e{time}&c."
+  reminder: "&7Your daily reward is ready. Type &e/daily &7to claim it."
+  streak-lost: "&7Your streak was reset. Claim every day to build it back up."

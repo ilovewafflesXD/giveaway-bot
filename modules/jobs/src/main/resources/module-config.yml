@@ -1,0 +1,106 @@
+# Jobs: players pick jobs, earn money and levels for doing them, and earn more as they level.
+# Money is paid through the core economy.
+
+max-jobs: 2
+max-level: 100
+# Extra pay per job level (0.02 = +2% per level, so level 50 pays double).
+pay-bonus-per-level: 0.02
+# XP a player gets per 1.00 of money earned from an action.
+xp-per-money: 8
+# Players cannot earn more than this per real day from jobs. 0 turns the cap off.
+daily-income-cap: 25000
+# Ores and logs placed by players pay nothing when broken (stops place-and-break farming).
+track-placed-blocks: true
+# Mobs from spawners and spawn eggs pay nothing.
+ignore-spawner-mobs: true
+
+# In every list below a key starting with * matches by ending, for example *_LOG matches OAK_LOG.
+jobs:
+  miner:
+    name: "&bMiner"
+    description: "Earn money breaking ores and stone."
+    blocks:
+      COAL_ORE: 1.0
+      DEEPSLATE_COAL_ORE: 1.2
+      COPPER_ORE: 0.8
+      DEEPSLATE_COPPER_ORE: 1.0
+      IRON_ORE: 1.5
+      DEEPSLATE_IRON_ORE: 1.8
+      GOLD_ORE: 2.5
+      DEEPSLATE_GOLD_ORE: 3.0
+      NETHER_GOLD_ORE: 1.0
+      REDSTONE_ORE: 1.5
+      DEEPSLATE_REDSTONE_ORE: 1.8
+      LAPIS_ORE: 2.0
+      DEEPSLATE_LAPIS_ORE: 2.4
+      DIAMOND_ORE: 6.0
+      DEEPSLATE_DIAMOND_ORE: 7.0
+      EMERALD_ORE: 6.0
+      DEEPSLATE_EMERALD_ORE: 7.0
+      NETHER_QUARTZ_ORE: 1.0
+      ANCIENT_DEBRIS: 12.0
+      STONE: 0.05
+      DEEPSLATE: 0.06
+      NETHERRACK: 0.02
+  lumberjack:
+    name: "&6Lumberjack"
+    description: "Earn money chopping trees."
+    blocks:
+      "*_LOG": 0.6
+      "*_STEM": 0.6
+      "*_WOOD": 0.5
+  farmer:
+    name: "&aFarmer"
+    description: "Earn money harvesting fully grown crops."
+    blocks:
+      WHEAT: 0.6
+      CARROTS: 0.6
+      POTATOES: 0.6
+      BEETROOTS: 0.7
+      NETHER_WART: 0.9
+      COCOA: 0.8
+      PUMPKIN: 0.7
+      MELON: 0.5
+      SUGAR_CANE: 0.3
+  hunter:
+    name: "&cHunter"
+    description: "Earn money killing hostile mobs."
+    mobs:
+      ZOMBIE: 1.0
+      SKELETON: 1.0
+      SPIDER: 0.8
+      CREEPER: 1.5
+      ENDERMAN: 2.5
+      WITCH: 3.0
+      BLAZE: 2.5
+      WITHER_SKELETON: 4.0
+      PIGLIN_BRUTE: 5.0
+      GHAST: 4.0
+      PHANTOM: 2.0
+      DROWNED: 1.0
+      HUSK: 1.0
+      STRAY: 1.2
+      CAVE_SPIDER: 1.0
+      SLIME: 0.8
+      MAGMA_CUBE: 1.0
+      GUARDIAN: 2.5
+      ELDER_GUARDIAN: 25.0
+      WARDEN: 100.0
+      WITHER: 150.0
+      ENDER_DRAGON: 250.0
+  fisher:
+    name: "&3Fisher"
+    description: "Earn money catching fish."
+    catches:
+      COD: 1.5
+      SALMON: 2.0
+      TROPICAL_FISH: 4.0
+      PUFFERFISH: 3.0
+      NAUTILUS_SHELL: 8.0
+      default: 1.0
+
+messages:
+  level-up: "&6&lLEVEL UP! &7Your &e{job} &7job is now level &e{level}&7."
+  joined: "&aYou joined &e{job}&a."
+  left: "&7You left &e{job}&7."
+  cap-reached: "&cYou've reached today's job income cap."

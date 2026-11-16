@@ -1,0 +1,13 @@
+name: WaffleCore
+version: 2.1.0
+main: com.wafflemc.host.WaffleHost
+api-version: '26.3'
+author: WaffleMC
+description: WaffleMC all-in-one server core (hot-reloadable, multi-module).
+commands:
+  wafflecore:
+    description: WaffleCore admin command.
+    aliases: [wc]
+permissions:
+  wafflecore.admin:
+    default: op

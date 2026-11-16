@@ -1,0 +1,29 @@
+# XrayAlert: warns staff when someone digs out an unusual number of hidden ores.
+# Only ores that were completely enclosed by solid blocks count, so normal cave mining is ignored.
+# Staff need wafflecore.xray.alerts to see alerts and wafflecore.xray to use /xray.
+
+# Rolling window used for every threshold below.
+window-minutes: 10
+
+# Alert when this many hidden ores of one kind are mined inside the window.
+# Keys are matched against the block name, so "DIAMOND" covers DIAMOND_ORE and DEEPSLATE_DIAMOND_ORE.
+thresholds:
+  ANCIENT_DEBRIS: 4
+  DIAMOND: 6
+  EMERALD: 4
+  GOLD: 14
+  LAPIS: 16
+  REDSTONE: 24
+
+# Do not alert about the same player more than once per this many minutes.
+alert-cooldown-minutes: 5
+
+# Gamemodes that are ignored.
+ignore-creative: true
+
+# Optional: console commands run on every alert ({player} is replaced). Leave empty for alerts only.
+commands: []
+
+messages:
+  alert: "&8[&bXray&8] &e{player} &7mined &c{count} hidden {ore}&7 in &e{minutes}m &8(&7{blocks} blocks broken&8)"
+  hover: "Click to teleport to {player}"
