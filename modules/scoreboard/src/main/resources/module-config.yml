@@ -1,0 +1,23 @@
+# Scoreboard: a configurable sidebar. Players toggle it with /sidebar (or /sb).
+# Colour codes use &. Lines are shown top to bottom, up to 15.
+#
+# Placeholders: {player} {balance} {online} {max} {ping} {tps} {playtime} {world} {x} {y} {z}
+
+update-ticks: 40
+enabled-by-default: true
+
+title: "&6&lWaffle&e&lMC"
+lines:
+  - "&8&m                    "
+  - "&7Player &f{player}"
+  - "&7Balance &6{balance}"
+  - "&7Playtime &f{playtime}"
+  - ""
+  - "&7Online &a{online}&8/&7{max}"
+  - "&7Ping &f{ping}ms"
+  - "&7TPS &f{tps}"
+  - "&8&m                    "
+  - "&eWaffleMC"
+
+# Worlds where the sidebar is hidden.
+hidden-worlds: []

@@ -1,0 +1,72 @@
+# ChatGuard: automatic chat moderation with staff alerts and escalating punishments.
+# Players with wafflecore.chatguard.bypass skip every check. Staff with wafflecore.chatguard.alerts see alerts.
+
+# Messages sent too quickly.
+rate:
+  enabled: true
+  min-interval-ms: 700
+  burst-messages: 5
+  burst-seconds: 6
+
+# Same message sent again within this many seconds.
+repeat:
+  enabled: true
+  seconds: 30
+
+# SHOUTING is quietly turned into lower case instead of blocked.
+caps:
+  enabled: true
+  min-length: 8
+  max-ratio: 0.7
+
+# "heeeeeeello" becomes "heeello".
+flood-chars:
+  enabled: true
+  max-run: 3
+
+# Blocked words. Common letter swaps (0 for o, 1 for i, @ for a) and spacing tricks are caught.
+words:
+  enabled: true
+  list:
+    - nigger
+    - nigga
+    - faggot
+    - retard
+    - kys
+    - kill yourself
+
+# Links and server ads. Domains listed under allowed are fine.
+links:
+  enabled: true
+  allowed:
+    - discord.gg/BvFHUxveqt
+    - wafflemc
+
+# Points added for each kind of violation.
+points:
+  rate: 1
+  repeat: 1
+  words: 3
+  links: 3
+
+# Points fade after this many minutes without a new violation.
+decay-minutes: 10
+
+# Console commands run when a player reaches the points total. {player} is replaced.
+steps:
+  - points: 4
+    commands:
+      - "warn {player} Please slow down and keep chat clean"
+  - points: 8
+    commands:
+      - "tempmute {player} 10m Chat violations"
+  - points: 14
+    commands:
+      - "tempmute {player} 1d Repeated chat violations"
+
+messages:
+  rate: "&cYou're chatting too fast."
+  repeat: "&cPlease don't repeat yourself."
+  words: "&cPlease keep your language clean."
+  links: "&cLinks and advertising aren't allowed."
+  alert: "&8[&cChatGuard&8] &e{player} &7- &c{reason}&7: &f{message}"

@@ -1,0 +1,42 @@
+# Perf: server health report, scheduled dropped-item clearing, optional mob limits and low-TPS alerts.
+# /perf needs wafflecore.perf. Low-TPS alerts go to wafflecore.perf.alerts.
+
+# Clears dropped items on a timer, with countdown warnings.
+autoclear:
+  enabled: true
+  interval-minutes: 10
+  # Items must have existed this long before they can be cleared, so fresh drops are safe.
+  min-age-seconds: 20
+  # Warn this many seconds before a clear.
+  warnings: [60, 30, 10, 5, 3, 2, 1]
+  # Items with a custom name or lore are never removed. These materials are also always kept.
+  keep-materials:
+    - NETHERITE_INGOT
+    - NETHERITE_BLOCK
+    - NETHERITE_SCRAP
+    - ANCIENT_DEBRIS
+    - ELYTRA
+    - TOTEM_OF_UNDYING
+    - NETHER_STAR
+    - BEACON
+    - DRAGON_EGG
+    - ENCHANTED_GOLDEN_APPLE
+    - TRIDENT
+    - MACE
+  messages:
+    warning: "&eDropped items will be cleared in &6{time}&e."
+    done: "&aCleared &6{count} &adropped items."
+
+# Removes surplus mobs from overcrowded chunks. Off by default because it deletes entities.
+mob-limit:
+  enabled: false
+  check-seconds: 30
+  max-per-chunk: 60
+  # Named, leashed, tamed, boss and these types are never removed.
+  keep-types: [VILLAGER, WANDERING_TRADER, IRON_GOLEM, ZOMBIE_VILLAGER, ALLAY, ARMOR_STAND]
+
+tps-alert:
+  enabled: true
+  threshold: 16.0
+  cooldown-minutes: 5
+  message: "&c&lLow TPS: &e{tps} &7(&e{mspt}ms &7per tick). Run &e/perf chunks &7to find the cause."
